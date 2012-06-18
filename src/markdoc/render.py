@@ -4,6 +4,7 @@ import os.path as p
 
 from markdoc.config import Config
 import markdown
+import mdx_mathjax
 
 
 Config.register_default('markdown.extensions', ())
@@ -73,6 +74,7 @@ def get_markdown_instance(config, curr_path='/', **extra_config):
         extension_configs=unflatten_extension_configs(config),
         safe_mode=config['markdown.safe-mode'],
         output_format=config['markdown.output-format'])
+    mdconfig['extensions'].append(mdx_mathjax.MathJaxExtension())
     
     mdconfig.update(extra_config) # Include any extra kwargs.
     
