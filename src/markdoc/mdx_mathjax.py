@@ -1,3 +1,7 @@
+"""
+This near trivial extension makes MathJax formulas AtomicStrings.
+"""
+
 import markdown
 
 class MathJaxInlinePattern(markdown.inlinepatterns.Pattern):
@@ -33,7 +37,8 @@ class MathJaxBlockPattern(markdown.inlinepatterns.Pattern):
 
 class MathJaxExtension(markdown.Extension):
     def extendMarkdown(self, md, md_globals):
-        # Needs to come before escape matching because \ is pretty important in LaTeX
+        # Needs to come before escape matching because \ is pretty important 
+        # in LaTeX
         md.inlinePatterns.add('mathjaxi', MathJaxInlinePattern(), '<escape')
         md.inlinePatterns.add('mathjaxb', MathJaxBlockPattern(), '<escape')
 
