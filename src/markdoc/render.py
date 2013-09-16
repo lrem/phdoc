@@ -12,7 +12,8 @@ Config.register_func_default('markdown.extension-configs', lambda cfg, key: {})
 Config.register_default('markdown.safe-mode', False)
 Config.register_default('markdown.output-format', 'html5')
 Config.register_default('document-extensions',
-    frozenset(['.md', '.mdown', '.markdown', '.wiki', '.text']))
+                        frozenset(['.md', '.mdown', '.markdown', '.wiki',
+                                   '.text']))
 
 
 class RelativeLinksTreeProcessor(markdown.treeprocessors.Treeprocessor):
@@ -73,6 +74,7 @@ def get_markdown_instance(config, curr_path='/', **extra_config):
         extension_configs=unflatten_extension_configs(config),
         safe_mode=config['markdown.safe-mode'],
         output_format=config['markdown.output-format'])
+    mdconfig['extensions'] = list(mdconfig['extensions'])
     mdconfig['extensions'].append(mdx_mathjax.MathJaxExtension())
 
     mdconfig.update(extra_config)  # Include any extra kwargs.
