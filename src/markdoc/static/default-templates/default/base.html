@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+{% import "macros/html" as html -%}
+{% import "macros/crumbs" as breadcrumbs with context -%}
+
+<head>
+  {% block head %}
+
+    {% block meta %}
+      <meta charset="UTF-8">
+    {% endblock %}
+
+    <title>
+      {% block title_prefix -%}
+        {% if 'wiki-name' in config %}
+          {{ config['wiki-name']|e }} » 
+        {% endif %}
+      {%- endblock %}
+      {% block title -%}
+        {{ title }}
+      {%- endblock %}
+    </title>
+
+    {% block css %}
+      {{ html.cssimport(make_relative("/media/css/basic.css")) }}
+      {{ html.cssimport(make_relative("/media/css/elements.css")) }}
+      {{ html.cssimport(make_relative("/media/css/pygments.css")) }}
+    {% endblock %}
+
+    {% block js %}{% endblock %}
+
+    {% block analytics %}
+      {% if 'google-analytics' in config %}
+        <!-- Google Analytics -->
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', '{{ config['google-analytics'] }}']);
+_gaq.push(['_trackPageview']);
+(function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+})();
+</script>
+        {% endif %}
+    {% endblock analytics %}
+  {% endblock head %}
+</head>
+
+<body class="hyphenate"{% block body_attrs %}{% endblock %}>
+  {% block body %}
+
+    <header>
+      {% block nav %}
+      {% if 'nav' in config %}
+        <nav>
+          <ul>
+            {% for page, label in config['nav'].iteritems() %}
+            <li {% if crumbs[-1][0]=='page' %} class="active" {% endif %}>
+                <a href="{{make_relative("/" + page + ".html")}}">
+                  {{ label }}
+                </a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+      {% endblock nav %}
+      {% block body_header %}
+        {% block crumbs %}
+          {{ breadcrumbs.crumbs(crumbs) }}
+        {% endblock crumbs %}
+      {% endblock body_header %}
+    </header>
+
+    <div id="content">
+      {% block content_header %}
+      {% endblock content_header %}
+
+      {% block content %}
+      {% endblock content %}
+
+      {% block content_footer %}
+      {% endblock content_footer %}
+
+    </div> <!-- div#content -->
+
+    <footer>
+      {% block body_footer %}
+        {% if 'footer-text' in config %}
+          {{config['footer-text']}}
+        {% else %}
+          {% if 'wiki-name' in config %}
+            {{ config['wiki-name']|e }} —
+          {% endif %}
+          Powered by <a href="http://markdoc.org/">Markdoc</a>.
+        {% endif %}
+      {% endblock body_footer %}
+    </footer>
+
+  {% endblock body %}
+  {% block hyphenator %}
+    {{ html.jsimport(make_relative("/media/js/hyphenator.js")) }}
+    {{ html.js("Hyphenator.run();") }}
+    {{ html.jsimport(make_relative("/media/js/addcss.js")) }}
+    {{ html.js("addcss('.hyphenate { text-align: justify; }');") }}
+  {% endblock hyphenator %}
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>  
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</body>
+</html>
+
+<!-- vim: set ts=2 sw=2: -->

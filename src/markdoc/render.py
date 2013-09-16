@@ -48,30 +48,12 @@ def make_relative(curr_path, href):
     return '/'.join(rel_list)
 
 
-def unflatten_extension_configs(config):
-    """Unflatten the markdown extension configs from the config dictionary."""
-
-    configs = config['markdown.extension-configs']
-
-    for key, value in config.iteritems():
-        if not key.startswith('markdown.extension-configs.'):
-            continue
-
-        parts = key[len('markdown.extension-configs.'):].split('.')
-        extension_config = configs
-        for part in parts[:-1]:
-            extension_config = extension_config.setdefault(part, {})
-        extension_config[parts[-1]] = value
-
-    return configs
-
-
 def get_markdown_instance(config, curr_path='/', **extra_config):
     """Return a `markdown.Markdown` instance for a given configuration."""
 
     mdconfig = dict(
         extensions=config['markdown.extensions'],
-        extension_configs=unflatten_extension_configs(config),
+        extension_configs=config['markdown.extension-configs'],
         safe_mode=config['markdown.safe-mode'],
         output_format=config['markdown.output-format'])
     mdconfig['extensions'] = list(mdconfig['extensions'])
