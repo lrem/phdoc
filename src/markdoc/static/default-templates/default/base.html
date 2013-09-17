@@ -56,10 +56,10 @@ _gaq.push(['_trackPageview']);
       {% if 'nav' in config %}
         <nav>
           <ul>
-            {% for page, label in config['nav'].iteritems() %}
-            <li {% if crumbs[-1][0]=='page' %} class="active" {% endif %}>
+            {% for page in config['nav']['pages'] %}
+            <li {% if crumbs[-1][0]==page %} class="active" {% endif %}>
                 <a href="{{make_relative("/" + page + ".html")}}">
-                  {{ label }}
+                  {{ config['nav']['labels'][page] }}
                 </a></li>
             {% endfor %}
           </ul>
