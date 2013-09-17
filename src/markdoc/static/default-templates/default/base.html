@@ -28,8 +28,6 @@
       {{ html.cssimport(make_relative("/media/css/pygments.css")) }}
     {% endblock %}
 
-    {% block js %}{% endblock %}
-
     {% block analytics %}
       {% if 'google-analytics' in config %}
         <!-- Google Analytics -->
@@ -99,12 +97,20 @@ _gaq.push(['_trackPageview']);
     </footer>
 
   {% endblock body %}
+
+{% block js %}
   {% block hyphenator %}
     {{ html.jsimport(make_relative("/media/js/hyphenator.js")) }}
     {{ html.js("Hyphenator.run();") }}
     {{ html.jsimport(make_relative("/media/js/addcss.js")) }}
     {{ html.js("addcss('.hyphenate { text-align: justify; }');") }}
   {% endblock hyphenator %}
+  <script type="text/javascript" 
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+  </script>
+  <script type="text/javascript" 
+  src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  {{ html.jsimport(make_relative("/media/js/fold.js")) }}
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -116,6 +122,7 @@ _gaq.push(['_trackPageview']);
 <script type="text/javascript"
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
+{% endblock %}
 </body>
 </html>
 

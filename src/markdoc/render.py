@@ -5,7 +5,7 @@ import os.path as p
 from markdoc.config import Config
 import markdown
 import mdx_mathjax
-
+import mdx_fold
 
 Config.register_default('markdown.extensions', ())
 Config.register_func_default('markdown.extension-configs', lambda cfg, key: {})
@@ -58,6 +58,7 @@ def get_markdown_instance(config, curr_path='/', **extra_config):
         output_format=config['markdown.output-format'])
     mdconfig['extensions'] = list(mdconfig['extensions'])
     mdconfig['extensions'].append(mdx_mathjax.MathJaxExtension())
+    mdconfig['extensions'].append(mdx_fold.FoldExtension())
 
     mdconfig.update(extra_config)  # Include any extra kwargs.
 
