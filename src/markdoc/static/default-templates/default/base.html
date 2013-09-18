@@ -55,7 +55,7 @@ _gaq.push(['_trackPageview']);
         <nav>
           <ul>
             {% for page in config['nav']['pages'] %}
-            <li {% if crumbs[-1][0]==page %} class="active" {% endif %}>
+            <li {% if page == active_nav %} class="active" {% endif %}>
                 <a href="{{make_relative("/" + page + ".html")}}">
                   {{ config['nav']['labels'][page] }}
                 </a></li>
@@ -70,7 +70,6 @@ _gaq.push(['_trackPageview']);
         {% endblock crumbs %}
       {% endblock body_header %}
     </header>
-
     <div id="content">
       {% block content_header %}
       {% endblock content_header %}
