@@ -4,7 +4,7 @@ import os.path as p
 import shutil
 import tempfile
 
-from markdoc.config import Config
+from phdoc.config import Config
 
 
 def get_temporary_config():

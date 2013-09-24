@@ -1,5 +1,5 @@
     >>> import os.path as p
-    >>> from markdoc.builder import Builder, get_title
+    >>> from phdoc.builder import Builder, get_title
     >>> b = Builder(CONFIG)
 
 Filesystem Interaction

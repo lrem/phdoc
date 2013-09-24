@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from markdoc.config import Config
+from phdoc.config import Config
 
 
 Config.register_default('server.bind', '127.0.0.1')

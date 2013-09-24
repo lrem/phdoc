@@ -4,9 +4,9 @@ import logging
 import os
 import argparse
 
-from markdoc.cli import commands
-from markdoc.cli.parser import parser
-from markdoc.config import Config, ConfigNotFound
+from phdoc.cli import commands
+from phdoc.cli.parser import parser
+from phdoc.config import Config, ConfigNotFound
 
 
 def main(cmd_args=None):
@@ -32,7 +32,7 @@ def main(cmd_args=None):
     else:
         config = None
     
-    logging.getLogger('markdoc').setLevel(getattr(logging, args.log_level))
+    logging.getLogger('phdoc').setLevel(getattr(logging, args.log_level))
     
     command = getattr(commands, args.command.replace('-', '_'))
     return command(config, args)

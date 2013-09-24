@@ -6,7 +6,7 @@ import os.path as p
 
 import webob
 
-from markdoc.render import make_relative
+from phdoc.render import make_relative
 
 
 if not mimetypes.inited:
@@ -46,7 +46,7 @@ class MarkdocWSGIApplication(object):
     
     def __init__(self, config):
         self.config = config
-        self.log = logging.getLogger('markdoc.wsgi')
+        self.log = logging.getLogger('phdoc.wsgi')
     
     def __call__(self, environ, start_response):
         request = webob.Request(environ)

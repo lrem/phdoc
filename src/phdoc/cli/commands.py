@@ -11,9 +11,9 @@ import shutil
 import subprocess
 import sys
 
-import markdoc
-from markdoc.builder import Builder
-from markdoc.cli.parser import subparsers
+import phdoc
+from phdoc.builder import Builder
+from phdoc.cli.parser import subparsers
 
 
 def command(function):
@@ -25,7 +25,7 @@ def command(function):
     
     @wraps(function)
     def wrapper(config, args):
-        logging.getLogger('markdoc').debug('Running markdoc.%s' % cmd_name)
+        logging.getLogger('phdoc').debug('Running phdoc.%s' % cmd_name)
         return function(config, args)
     wrapper.parser = parser
     
@@ -45,7 +45,7 @@ def show_config(config, args):
 def init(_, args):
     """Initialize a new Markdoc repository."""
     
-    log = logging.getLogger('markdoc.init')
+    log = logging.getLogger('phdoc.init')
     
     if not args.destination:
         log.info('No destination specified; using current directory')
@@ -68,8 +68,8 @@ def init(_, args):
     log.debug('mkdir %s/wiki/' % destination)
     os.makedirs(p.join(destination, 'wiki'))
     
-    log.debug('Creating markdoc.yaml file')
-    config_filename = p.join(destination, 'markdoc.yaml')
+    log.debug('Creating phdoc.yaml file')
+    config_filename = p.join(destination, 'phdoc.yaml')
     fp = open(config_filename, 'w')
     try:
         fp.write('{}\n')
@@ -77,7 +77,7 @@ def init(_, args):
         fp.close()
     
     if args.vcs_ignore:
-        config = markdoc.config.Config.for_directory(destination)
+        config = phdoc.config.Config.for_directory(destination)
         args = vcs_ignore.parser.parse_args([args.vcs_ignore])
         vcs_ignore(config, args)
     
@@ -94,7 +94,7 @@ init.parser.add_argument('--vcs-ignore', choices=['hg', 'git', 'cvs', 'bzr'],
 def vcs_ignore(config, args):
     """Create a VCS ignore file for a wiki."""
     
-    log = logging.getLogger('markdoc.vcs-ignore')
+    log = logging.getLogger('phdoc.vcs-ignore')
     log.debug('Creating ignore file for %s' % args.vcs)
     wiki_root = config['meta.root'] # shorter local alias.
     
@@ -139,7 +139,7 @@ vcs_ignore.parser.add_argument('-o', '--output', default=None, metavar='FILENAME
 def clean_html(config, args):
     """Clean built HTML from the HTML root."""
     
-    log = logging.getLogger('markdoc.clean-html')
+    log = logging.getLogger('phdoc.clean-html')
     
     if p.exists(config.html_dir):
         log.debug('rm -Rf %s' % config.html_dir)
@@ -153,7 +153,7 @@ def clean_html(config, args):
 def clean_temp(config, args):
     """Clean built HTML from the temporary directory."""
     
-    log = logging.getLogger('markdoc.clean-temp')
+    log = logging.getLogger('phdoc.clean-temp')
     
     if p.exists(config.temp_dir):
         log.debug('rm -Rf %s' % config.temp_dir)
@@ -169,7 +169,7 @@ def clean_temp(config, args):
 def sync_static(config, args):
     """Sync static files into the HTML root."""
     
-    log = logging.getLogger('markdoc.sync-static')
+    log = logging.getLogger('phdoc.sync-static')
     
     if not p.exists(config.html_dir):
         log.debug('makedirs %s' % config.html_dir)
@@ -180,8 +180,8 @@ def sync_static(config, args):
     
     if config['use-default-static']:
         # rsync needs the paths to have trailing slashes to work correctly.
-        command.append(p.join(markdoc.default_static_dir, ''))
-        display_cmd.append(p.basename(markdoc.default_static_dir) + '/')
+        command.append(p.join(phdoc.default_static_dir, ''))
+        display_cmd.append(p.basename(phdoc.default_static_dir) + '/')
     
     if not config['cvs-exclude']:
         command.remove('--cvs-exclude')
@@ -205,7 +205,7 @@ def sync_static(config, args):
 def sync_html(config, args):
     """Sync built HTML and static media into the HTML root."""
     
-    log = logging.getLogger('markdoc.sync-html')
+    log = logging.getLogger('phdoc.sync-html')
     
     if not p.exists(config.html_dir):
         log.debug('makedirs %s' % config.html_dir)
@@ -219,8 +219,8 @@ def sync_html(config, args):
     display_cmd.append(p.basename(config.temp_dir) + '/')
     
     if config['use-default-static']:
-        command.append(p.join(markdoc.default_static_dir, ''))
-        display_cmd.append(p.basename(markdoc.default_static_dir) + '/')
+        command.append(p.join(phdoc.default_static_dir, ''))
+        display_cmd.append(p.basename(phdoc.default_static_dir) + '/')
     
     if not config['cvs-exclude']:
         command.remove('--cvs-exclude')
@@ -246,7 +246,7 @@ def sync_html(config, args):
 def build(config, args):
     """Compile wiki to HTML and sync to the HTML root."""
     
-    log = logging.getLogger('markdoc.build')
+    log = logging.getLogger('phdoc.build')
     
     clean_temp(config, args)
     
@@ -275,7 +275,7 @@ def build(config, args):
 def build_listing(config, args):
     """Create listings for all directories in the HTML root (post-build)."""
     
-    log = logging.getLogger('markdoc.build-listing')
+    log = logging.getLogger('phdoc.build-listing')
     
     list_basename = config['listing-filename']
     builder = Builder(config)
@@ -322,9 +322,9 @@ def serve(config, args):
     """Serve the built HTML from the HTML root."""
     
     # This should be a lazy import, otherwise it'll slow down the whole CLI.
-    from markdoc.wsgi import MarkdocWSGIApplication
+    from phdoc.wsgi import MarkdocWSGIApplication
     
-    log = logging.getLogger('markdoc.serve')
+    log = logging.getLogger('phdoc.serve')
     app = MarkdocWSGIApplication(config)
     
     config['server.port'] = args.port

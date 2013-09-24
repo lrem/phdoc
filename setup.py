@@ -21,16 +21,16 @@ def read_from(filename):
 if not hasattr(p, 'relpath'):
     def relpath(path, start=p.curdir):
         """Return a relative version of a path"""
-        
+
         if not path:
             raise ValueError("no path specified")
-        
+
         start_list = p.abspath(start).split(p.sep)
         path_list = p.abspath(path).split(p.sep)
-        
+
         # Work out how much of the filepath is shared by start and path.
         i = len(p.commonprefix([start_list, path_list]))
-        
+
         rel_list = [p.pardir] * (len(start_list)-i) + path_list[i:]
         if not rel_list:
             return p.curdir
@@ -39,7 +39,7 @@ if not hasattr(p, 'relpath'):
 
 
 def get_version():
-    data = read_from(rel_file('src', 'markdoc', '__init__.py'))
+    data = read_from(rel_file('src', 'phdoc', '__init__.py'))
     return re.search(r"__version__ = '([^']+)'", data).group(1)
 
 
@@ -51,7 +51,7 @@ def get_requirements():
 
 def find_package_data():
     files = []
-    src_root = p.join(p.dirname(__file__), 'src', 'markdoc')
+    src_root = p.join(p.dirname(__file__), 'src', 'phdoc')
     static_root = p.join(src_root, 'static')
     for dirpath, subdirs, filenames in os.walk(static_root):
         for filename in filenames:
@@ -61,15 +61,14 @@ def find_package_data():
     return files
 
 setup(
-    name             = 'Markdoc',
+    name             = 'PHDoc',
     version          = get_version(),
-    author           = "Zachary Voase",
-    author_email     = "zacharyvoase@me.com",
-    url              = 'http://github.com/zacharyvoase/markdoc',
-    description      = "A lightweight Markdown-based wiki build tool.",
+    author           = "Remigiusz 'lRem' Modrzejewski",
+    url              = 'http://github.com/lrem/phdoc',
+    description      = "A Markdown-based wiki crafted for academics.",
     packages         = find_packages(where='src'),
     package_dir      = {'': 'src'},
-    package_data     = {'markdoc': find_package_data()},
-    entry_points     = {'console_scripts': ['markdoc = markdoc.cli.main:main']},
+    package_data     = {'phdoc': find_package_data()},
+    entry_points     = {'console_scripts': ['phdoc = phdoc.cli.main:main']},
     install_requires = get_requirements(),
 )

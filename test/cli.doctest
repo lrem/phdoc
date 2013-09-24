@@ -1,9 +1,9 @@
-First we have to set up a Python function for running the command-line tool. Since the main entry point is the `markdoc.cli.main.main()` function, we can just call that directly, with some defaults for the current wiki root:
+First we have to set up a Python function for running the command-line tool. Since the main entry point is the `phdoc.cli.main.main()` function, we can just call that directly, with some defaults for the current wiki root:
 
     >>> import os
     >>> import os.path as p
-    >>> from markdoc.cli.main import main
-    >>> def markdoc(*args):
+    >>> from phdoc.cli.main import main
+    >>> def phdoc(*args):
     ...     try:
     ...         main(['-c', WIKI_ROOT] + list(args))
     ...     except SystemExit, exc:
@@ -12,10 +12,10 @@ First we have to set up a Python function for running the command-line tool. Sin
 
 The `show-config` command will show the current Markdoc config:
 
-    >>> exit_code = markdoc('show-config') # doctest: +ELLIPSIS
+    >>> exit_code = phdoc('show-config') # doctest: +ELLIPSIS
     {'9d03e32c6cb1455388a170e3bb0c2030': '7010d5d5871143d089cb662cb540cbd5',
      'hide-prefix': '_',
-     'meta.config-file': '.../example/markdoc.yaml',
+     'meta.config-file': '.../example/phdoc.yaml',
      'meta.root': '.../example',
      'use-default-static': False,
      'use-default-templates': False}
@@ -25,7 +25,7 @@ The `show-config` command will show the current Markdoc config:
 
 `sync-static` will compile the wiki's static media into the HTML root:
 
-    >>> markdoc('--quiet', 'sync-static') # doctest: +ELLIPSIS
+    >>> phdoc('--quiet', 'sync-static') # doctest: +ELLIPSIS
     0
 
 If you leave out the `--quiet` option, Markdoc will print some additional logging information, including the `rsync` command that's run in the background; the rsync output itself will also be written to the terminal.
@@ -35,9 +35,9 @@ The static media will now be in the HTML root:
     >>> os.listdir(CONFIG.html_dir)
     ['example.css']
 
-There are three other commands -- `clean-html`, `clean-temp`, and `sync-html` -- which are used in the background by the `build` task. `markdoc build` will compile all the HTML, and then synchronize both built HTML and static media into the HTML root (usually `WIKI_ROOT/.html`).
+There are three other commands -- `clean-html`, `clean-temp`, and `sync-html` -- which are used in the background by the `build` task. `phdoc build` will compile all the HTML, and then synchronize both built HTML and static media into the HTML root (usually `WIKI_ROOT/.html`).
 
-    >>> markdoc('--quiet', 'build')
+    >>> phdoc('--quiet', 'build')
     0
     
     >>> print '\n'.join(sorted(os.listdir(CONFIG.html_dir)))

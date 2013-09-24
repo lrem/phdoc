@@ -4,9 +4,9 @@ import os
 import os.path as p
 import re
 
-from markdoc.cache import DocumentCache, RenderCache, read_from
-from markdoc.config import Config
-from markdoc.render import make_relative
+from phdoc.cache import DocumentCache, RenderCache, read_from
+from phdoc.config import Config
+from phdoc.render import make_relative
 
 
 Config.register_default('listing-filename', '_list.html')

@@ -8,10 +8,10 @@ import os.path as p
 
 import yaml
 
-import markdoc.exc
+import phdoc.exc
 
 
-class ConfigNotFound(markdoc.exc.AbortError):
+class ConfigNotFound(phdoc.exc.AbortError):
     """The configuration file was not found."""
     pass
 
@@ -87,7 +87,7 @@ class Config(dict):
     def for_directory(cls, directory=None):
 
         """
-        Get the configuration from the 'markdoc.yaml' file in a directory.
+        Get the configuration from the 'phdoc.yaml' file in a directory.
 
         If you do not specify a directory, this method will use the current
         working directory.
@@ -96,11 +96,11 @@ class Config(dict):
         if directory is None:
             directory = os.getcwd()
 
-        if p.exists(p.join(directory, 'markdoc.yaml')):
-            return cls.for_file(p.join(directory, 'markdoc.yaml'))
-        elif p.exists(p.join(directory, '.markdoc.yaml')):
-            return cls.for_file(p.join(directory, '.markdoc.yaml'))
-        raise ConfigNotFound("A markdoc configuration could not be found.")
+        if p.exists(p.join(directory, 'phdoc.yaml')):
+            return cls.for_file(p.join(directory, 'phdoc.yaml'))
+        elif p.exists(p.join(directory, '.phdoc.yaml')):
+            return cls.for_file(p.join(directory, '.phdoc.yaml'))
+        raise ConfigNotFound("A phdoc configuration could not be found.")
 
     @classmethod
     def for_file(cls, filename):

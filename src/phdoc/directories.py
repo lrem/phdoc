@@ -2,7 +2,7 @@
 
 import os.path as p
 
-from markdoc.config import Config
+from phdoc.config import Config
 
 
 def html_dir(config):

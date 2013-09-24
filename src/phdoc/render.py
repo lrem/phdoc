@@ -2,7 +2,7 @@
 
 import os.path as p
 
-from markdoc.config import Config
+from phdoc.config import Config
 import markdown
 import mdx_mathjax
 import mdx_fold
@@ -66,5 +66,5 @@ def get_markdown_instance(config, curr_path='/', **extra_config):
     md_instance.treeprocessors['relative_links'] = RelativeLinksTreeProcessor(curr_path=curr_path)
     return md_instance
 
-# Add it as a method to `markdoc.config.Config`.
+# Add it as a method to `phdoc.config.Config`.
 Config.markdown = get_markdown_instance

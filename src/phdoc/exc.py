@@ -2,7 +2,7 @@
 
 
 class MarkdocError(Exception):
-    """An error occurred whilst running the markdoc utility."""
+    """An error occurred whilst running the phdoc utility."""
     pass
 
 

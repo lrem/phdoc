@@ -1,7 +1,7 @@
 Set up the document cache with a 'root' directory:
 
     >>> import os
-    >>> from markdoc.cache import DocumentCache
+    >>> from phdoc.cache import DocumentCache
     >>> cache = DocumentCache(base=CONFIG.wiki_dir)
 
 You can fetch files from the document cache:

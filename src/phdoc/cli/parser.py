@@ -4,21 +4,21 @@ import os
 
 import argparse
 
-import markdoc
-from markdoc.config import Config
+import phdoc
+from phdoc.config import Config
 
 
 parser = argparse.ArgumentParser(**{
-    'prog': 'markdoc',
+    'prog': 'phdoc',
     'description': 'A lightweight Markdown-based wiki build tool.',
 })
 
 parser.add_argument('-v', '--version', action='version',
-    version=markdoc.__version__)
+    version=phdoc.__version__)
 
 config = parser.add_argument('--config', '-c', default=os.getcwd(),
     help="Use the specified Markdoc config (a YAML file or a directory "
-         "containing markdoc.yaml)")
+         "containing phdoc.yaml)")
 
 log_level = parser.add_argument('--log-level', '-l', metavar='LEVEL',
     default='INFO', choices='DEBUG INFO WARN ERROR'.split(),

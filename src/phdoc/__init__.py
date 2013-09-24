@@ -5,7 +5,7 @@ import os
 import os.path as p
 
 
-__version__ = '0.6.6'
+__version__ = '0.7.0'
 
 
 static_dir = p.join(p.dirname(__file__), 'static')
@@ -16,16 +16,16 @@ default_template_dir = p.join(static_dir, 'default-templates')
 if not hasattr(p, 'relpath'):
     def relpath(path, start=p.curdir):
         """Return a relative version of a path"""
-        
+
         if not path:
             raise ValueError("no path specified")
-        
+
         start_list = p.abspath(start).split(p.sep)
         path_list = p.abspath(path).split(p.sep)
-        
+
         # Work out how much of the filepath is shared by start and path.
         i = len(p.commonprefix([start_list, path_list]))
-        
+
         rel_list = [p.pardir] * (len(start_list)-i) + path_list[i:]
         if not rel_list:
             return p.curdir
@@ -40,13 +40,13 @@ console_handler = logging.StreamHandler() # By default, outputs to stderr.
 console_handler.setFormatter(default_formatter)
 console_handler.setLevel(logging.DEBUG)
 
-logging.getLogger('markdoc').addHandler(console_handler)
-logging.getLogger('markdoc').setLevel(logging.INFO) # Default level.
+logging.getLogger('phdoc').addHandler(console_handler)
+logging.getLogger('phdoc').setLevel(logging.INFO) # Default level.
 
 # These modules all initialize various default config values, so need to be
 # imported straight away.
-import markdoc.builder
-import markdoc.directories
-import markdoc.render
-import markdoc.server
-import markdoc.templates
+import phdoc.builder
+import phdoc.directories
+import phdoc.render
+import phdoc.server
+import phdoc.templates

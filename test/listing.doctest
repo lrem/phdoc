@@ -1,6 +1,6 @@
 To generate listings, we first need to build the wiki.
 
-    >>> from markdoc.cli.main import main
+    >>> from phdoc.cli.main import main
     >>> try:
     ...     main(['-c', WIKI_ROOT, '--quiet', 'build'])
     ... except SystemExit, exc:
@@ -22,7 +22,7 @@ The wiki should now be built in the HTML root:
 
 Now we can try getting some listings. The bulk of the process occurs in the `Builder.listing_context()` method, which builds a template context dictionary for rendering the Jinja2 `listing.html` template. First we have to get a `Builder` instance:
 
-    >>> from markdoc.builder import Builder
+    >>> from phdoc.builder import Builder
     >>> b = Builder(CONFIG)
 
 Now we can get the listing for the HTML root itself, just by passing the empty string:
