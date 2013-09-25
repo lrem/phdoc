@@ -1,5 +1,4 @@
-recursive-include src/markdoc/static/ *
+recursive-include src/phdoc/static/ *
 include distribute_setup.py
 include REQUIREMENTS
 global-exclude .DS_Store
-prune src/markdoc/static/default-static/media/sass/.sass-cache

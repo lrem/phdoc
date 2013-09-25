@@ -4,11 +4,13 @@ import os
 import os.path as p
 import re
 
-from distribute_setup import use_setuptools; use_setuptools()
+from distribute_setup import use_setuptools
+use_setuptools()
 from setuptools import setup, find_packages
 
 
 rel_file = lambda *args: p.join(p.dirname(p.abspath(__file__)), *args)
+
 
 def read_from(filename):
     fp = open(filename)
@@ -31,7 +33,7 @@ if not hasattr(p, 'relpath'):
         # Work out how much of the filepath is shared by start and path.
         i = len(p.commonprefix([start_list, path_list]))
 
-        rel_list = [p.pardir] * (len(start_list)-i) + path_list[i:]
+        rel_list = [p.pardir] * (len(start_list) - i) + path_list[i:]
         if not rel_list:
             return p.curdir
         return p.join(*rel_list)
@@ -61,7 +63,7 @@ def find_package_data():
     return files
 
 setup(
-    name             = 'PHDoc',
+    name             = 'phdoc',
     version          = get_version(),
     author           = "Remigiusz 'lRem' Modrzejewski",
     url              = 'http://github.com/lrem/phdoc',
