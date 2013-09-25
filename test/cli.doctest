@@ -47,5 +47,8 @@ There are three other commands -- `clean-html`, `clean-temp`, and `sync-html` --
     file1.html
     file2.html
     file3.html
+    file4.html
+    file5.html
+    file6.html
     index.html
     subdir

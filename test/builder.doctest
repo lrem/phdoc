@@ -42,6 +42,9 @@ You can also walk through all files in the wiki, using the `walk()` method:
     file1.md
     file2.md
     file3.md
+    file4.md
+    file5.md
+    file6.md
     subdir/hello.md
 
 Rendering

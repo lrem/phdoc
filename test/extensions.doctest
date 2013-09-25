@@ -1,0 +1,22 @@
+    >>> import os.path as p
+    >>> from phdoc.builder import Builder, get_title
+    >>> b = Builder(CONFIG)
+
+MathJAX
+=======
+
+MathJAX simply leaves the whole markup as-is for the Javascript:
+
+    >>> b.render('file4.md')
+    u'<p><em>some</em> <span>$*math*$</span></p>'
+    >>> b.render('file5.md')
+    u'<p><em>some</em> <span>\\[*math*\\]</span></p>'
+
+Foldable quotes
+===============
+
+Again, this uses Javascript, 
+HTML-wise only putting a blockqoute tag with fold class.
+    >>> b.render('file6.md')
+    u'<p>Abstract:</p>\n<blockquote class="fold">\n<p>hidden</p>\n</blockquote>'
+

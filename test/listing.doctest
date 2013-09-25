@@ -17,6 +17,9 @@ The wiki should now be built in the HTML root:
     file1.html
     file2.html
     file3.html
+    file4.html
+    file5.html
+    file6.html
     index.html
     subdir
 
@@ -35,13 +38,31 @@ Now we can get the listing for the HTML root itself, just by passing the empty s
                 'humansize': '27B',
                 'size': 27,
                 'slug': 'example'}],
-     'make_relative': <function <lambda> at 0x...>,
+     'make_relative': <function <lambda> at 0x101f1e050>,
      'pages': [{'basename': 'an_empty_file.html',
                 'href': '/an_empty_file',
                 'humansize': '248B',
                 'size': 248,
                 'slug': 'an_empty_file',
                 'title': 'An Empty File'},
+               {'basename': 'file4.html',
+                'href': '/file4',
+                'humansize': '282B',
+                'size': 282,
+                'slug': 'file4',
+                'title': 'File4'},
+               {'basename': 'file5.html',
+                'href': '/file5',
+                'humansize': '284B',
+                'size': 284,
+                'slug': 'file5',
+                'title': 'File5'},
+               {'basename': 'file6.html',
+                'href': '/file6',
+                'humansize': '310B',
+                'size': 310,
+                'slug': 'file6',
+                'title': 'File6'},
                {'basename': 'file3.html',
                 'href': '/file3',
                 'humansize': '250B',
