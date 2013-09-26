@@ -1,15 +1,45 @@
 <!-- title: Index -->
 
-# Markdoc
+# PHDoc
 
-Markdoc is a lightweight Markdown-based wiki system. It’s been designed to allow
+PHDoc is a version of Markdoc adapted to the needs of academics.
+Markdoc is a lightweight Markdown-based wiki system.
+It’s been designed to allow
 you to create and manage wikis as quickly and easily as possible.
 
 
 ## What is it good for?
 
-Potential use cases for Markdoc include, but aren’t limited to:
+Potential use cases for PHDoc include, but aren’t limited to:
 
+*Personal* pages in your institution
+:   Research institutions usually provide the means
+    and expect the researchers
+    to create *personal* pages.
+    These are usually just a few documents containing the essentials:
+    contact information, list of publications
+    and maybe a teaching schedule or a list of projects to brag about.
+    Most people tend to handcraft static HTML for this,
+    as setting up anything dynamic is more pain than gain.
+    PHDoc is an easy and efficient alternative.
+
+Quick dissemination of notes, raw data and media objects
+:   Perfect for internal communication
+    or dissemination of content that escapes the frame of scientific
+    publishing.
+    PHDoc allows you to easily write pages containing 
+    all the basic HTML markup,
+    highlighted code snippets
+    and LaTeX mathematics.
+    Adding any files,
+    be it multimedia or raw data,
+    is as simple as putting the files in your directories.
+    Directory listings respecting the templates 
+    and containing the top-bar navigation
+    are created automatically.
+    
+As well as all that Markdoc is good for:
+    
 Technical Documentation/Manuals
 :   Markdoc can be used to write and render hand-written guides and manuals for
     software. Such documentation will normally be separate from
@@ -32,6 +62,7 @@ Static Site Generation
     perhaps with custom CSS styles, and publish the rendered HTML to a website.
     Markdoc need not be installed on the hosting site, since the resultant HTML
     is completely independent.
+
 
 
 ## Cool Features
