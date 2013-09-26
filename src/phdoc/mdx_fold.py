@@ -25,7 +25,7 @@ class FoldBlockProcessor(markdown.blockprocessors.BlockProcessor):
     Pretty much the original BlockQuoteProcessor with an additional class.
     """
 
-    RE = re.compile(r'(^|\n)[ ]{0,3}:[ ]?(.*)')
+    RE = re.compile(r'(^|\n)[ ]{0,3}\|[ ]?(.*)')
 
     def test(self, parent, block):
         return bool(self.RE.search(block))
@@ -37,7 +37,7 @@ class FoldBlockProcessor(markdown.blockprocessors.BlockProcessor):
             before = block[:m.start()]  # Lines before blockquote
             # Pass lines before blockquote in recursively for parsing first.
             self.parser.parseBlocks(parent, [before])
-            # Remove ``: `` from begining of each line.
+            # Remove ``| `` from begining of each line.
             block = '\n'.join([self.clean(line) for line in
                                block[m.start():].split('\n')])
         sibling = self.lastChild(parent)
@@ -58,9 +58,9 @@ class FoldBlockProcessor(markdown.blockprocessors.BlockProcessor):
         self.parser.state.reset()
 
     def clean(self, line):
-        """ Remove ``:`` from beginning of a line. """
+        """ Remove ``|`` from beginning of a line. """
         m = self.RE.match(line)
-        if line.strip() == ":":
+        if line.strip() == "|":
             return ""
         elif m:
             return m.group(2)
