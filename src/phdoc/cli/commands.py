@@ -104,6 +104,8 @@ markdown:
 My Name
 =======
 
+<img class="right border" alt="My photo" src="http://u.42.pl/2NBT_scientist">
+
 I am a professor in [Institution](http://example.org).
 
 My main contribution is a [hard proof][].

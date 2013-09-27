@@ -116,3 +116,13 @@ footer {
 i {
     color: #5af;
 }
+
+.right {
+    float: right;
+}
+
+.border {
+    padding: 1px;
+    border: 1px solid #777;
+    background-color: #eee;
+}
