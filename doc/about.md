@@ -54,6 +54,8 @@ HTML in Markdown documents gives it power and flexibility.
 
 *   A nice top-bar navigation.
 
+*   Scaffolding with self-explanatory example wiki and configuration.
+
 ## License
 
 PHDoc is covered by the MIT License:
