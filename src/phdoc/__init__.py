@@ -5,7 +5,7 @@ import os
 import os.path as p
 
 
-__version__ = '0.7.2'
+__version__ = '0.7.3'
 
 
 static_dir = p.join(p.dirname(__file__), 'static')

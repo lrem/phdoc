@@ -82,6 +82,9 @@ As well as all that Markdoc is good for:
 
 *   Microsoft Windows support (without remote sync)
 
+*   Rsync your wiki to actually remote locations 
+    (using *remote* configuration option)
+
 ## Cool Features
 
 *   Set up [Google Analytics][] tracking in one line of configuration.

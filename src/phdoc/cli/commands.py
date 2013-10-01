@@ -85,6 +85,7 @@ def init(_, args):
            '''
 wiki-name: PHDoc wiki
 html-dir: www
+remote: example.com:public_html
 nav:
     pages:
         - index
@@ -353,6 +354,28 @@ def copy_html(config):
 
     log.debug('copy completed')
 
+
+@command
+def remote(config, args):
+    """
+    Synchronize to `config.remote`.
+    """
+
+    log = logging.getLogger('phdoc.remote')
+
+    if 'remote' not in config:
+        raise RuntimeError('remote not configured')
+
+    cmd = ['rsync',
+           '-vaxq',
+           p.join(config.html_dir, ''),
+           p.join(config['remote'], '')]
+
+    log.debug(subprocess.list2cmdline(cmd))
+
+    subprocess.check_call(cmd)
+
+    log.debug('rsync completed')
 
 
 ## Building
