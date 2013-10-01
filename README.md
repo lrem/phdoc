@@ -80,6 +80,7 @@ As well as all that Markdoc is good for:
 
 *   Scaffolding with self-explanatory example wiki and configuration.
 
+*   Microsoft Windows support (without remote sync)
 
 ## Cool Features
 

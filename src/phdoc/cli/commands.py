@@ -314,6 +314,47 @@ def sync_html(config, args):
     log.debug('rsync completed')
 
 
+def overwriting_copy(src, dst):
+    """
+    Copies the `src` directory tree into `dst`,
+    overwriting any file it finds on its way.
+    """
+    root_src, root_dst = src, dst
+    for src, _dirs, files in os.walk(root_src):
+        dst = src.replace(root_src, root_dst)
+        if not p.exists(dst):
+            os.mkdir(dst)
+        for fil in files:
+            shutil.copy(p.join(src, fil), dst)
+
+
+def copy_html(config):
+    """
+    A Windows-friendly version of `sync_html`.
+    Can't sync to remote.
+    """
+
+    log = logging.getLogger('phdoc.sync-html')
+
+    if p.exists(config.html_dir):
+        log.debug('shutil.rmtree %s' % config.html_dir)
+        shutil.rmtree(config.html_dir)
+    log.debug('makedirs %s' % config.html_dir)
+    os.makedirs(config.html_dir)
+
+    dst = config.html_dir
+
+    if config['use-default-static']:
+        overwriting_copy(phdoc.default_static_dir, dst)
+    if p.isdir(config.static_dir):
+        overwriting_copy(config.static_dir, dst)
+
+    overwriting_copy(config.temp_dir, dst)
+
+    log.debug('copy completed')
+
+
+
 ## Building
 
 @command
@@ -341,7 +382,10 @@ def build(config, args):
         finally:
             fp.close()
 
-    sync_html(config, args)
+    if os.name == 'nt':
+        copy_html(config)
+    else:
+        sync_html(config, args)
     build_listing(config, args)
 
 
