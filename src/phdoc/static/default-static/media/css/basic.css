@@ -119,6 +119,7 @@ i {
 
 .right {
     float: right;
+    margin-left: 1em;
 }
 
 .border {
