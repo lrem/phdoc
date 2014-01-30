@@ -4,8 +4,8 @@ import os.path as p
 
 from phdoc.config import Config
 import markdown
-import mdx_mathjax
-import mdx_fold
+import phdoc.mdx_mathjax
+import phdoc.mdx_fold
 
 Config.register_default('markdown.extensions', ())
 Config.register_func_default('markdown.extension-configs', lambda cfg, key: {})
