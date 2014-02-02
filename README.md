@@ -101,11 +101,6 @@ As well as all that Markdoc is good for:
 *   Add [Pygments][]-powered syntax highlighting to your Markdoc wiki with a
     single [configuration parameter][syntax-highlighting].
 
-*   Markdoc is [public domain software][licensing]. It will always be completely
-    free to use, and you can redistribute it (in part or in whole) under any
-    circumstances (open-source, proprietary or otherwise) with no attribution or
-    encumberances.
-
 [google analytics]: http://markdoc.org/ref/configuration#metadata
 [barebones]: http://markdoc.org/tips/barebones
 [pygments]: http://pygments.org/
