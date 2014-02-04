@@ -93,7 +93,11 @@ As well as all that Markdoc is good for:
     text files in them.
 
 *   A built-in HTTP server and WSGI application to serve up a compiled wiki with
-    a single command.
+    a single command. 
+    Note this is intended for a fast preview on your own computer.
+    By default it binds to the loopback interface,
+    so is not visible over the network.
+    Therefore it does not introduce security issues even in case of software vulnerability.
 
 *   Continuous builds (via `rsync`) mean the server can keep running whilst
     Markdoc re-compiles the wiki. Just refresh your browser to see the changes.
